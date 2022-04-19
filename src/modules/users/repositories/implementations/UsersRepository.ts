@@ -16,7 +16,6 @@ export class UsersRepository implements IUsersRepository {
 
   async findUserWithGamesById({user_id}: IFindUserWithGamesDTO): Promise<User> {
     const user = await this.repository.findOne(user_id, { relations: ['games'] });
-
     if (!user) {
       throw new Error("User not exists")
   }
@@ -26,9 +25,9 @@ export class UsersRepository implements IUsersRepository {
   async findAllUsersOrderedByFirstName(): Promise<User[]> {
     // Complete usando raw query
     const queryAllUsers = 
-    ` SELECT  id, first_name, last_name, email, created_at, updated_at 
+    `SELECT id, first_name, last_name, email, created_at, updated_at 
     FROM users 
-    ORDER BY first_name `
+    ORDER BY first_name`
   ;
   return this.repository.query(queryAllUsers);
 }
